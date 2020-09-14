@@ -1,0 +1,45 @@
+:root {
+  --color-primary: #5287f3;
+  --color-orange: #f7931b;
+  --color-ocean: #29f3f3;
+  --color-lightGreen: #2bf3a9;
+  --color-green: #53f32b;
+  --color-yellow: #f0f32b;
+  --color-red: #f32b2b;
+}
+body {
+  background: #f3f5f8;
+}
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+.wrapper {
+  text-align: center;
+  width: 80vw;
+  margin: 0 auto;
+}
+header {
+  position: fixed;
+}
+footer {
+  bottom: 10px;
+}
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.item-input {
+  width: 100px;
+}
+.btn {
+  position: relative;
+  right: 20px;
+  margin-right: 10px;
+  padding: 0px;
+  bottom: 10px;
+  width: 5px;
+}
