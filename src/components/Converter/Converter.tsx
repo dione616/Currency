@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { selectData } from "../../redux/currency"
 import { RootState } from "../../redux/store"
@@ -21,6 +21,7 @@ const Converter: React.FC<Props> = (props) => {
   const [leftCurrency, setLeftCurrency] = useState({ count: 101, currency: "UAH" })
   const [rightCurrency, setRIghtCurrency] = useState({ count: 3.63, currency: "USD" })
   const [converted, setConverted] = useState(true)
+  let convertedValue
 
   const mapData = data.map((item) => {
     parseInt(item.base_ccy)
@@ -46,13 +47,19 @@ const Converter: React.FC<Props> = (props) => {
       console.log(found)
       console.log("Bef:", leftCurrency.count, parseFloat(found.sale))
 
-      let convertedValue = leftCurrency.count / parseFloat(found.sale)
+      convertedValue = leftCurrency.count / parseFloat(found.sale)
 
       setRIghtCurrency({ count: convertedValue, currency: rightCurrency.currency })
     } else {
       setConverted(false)
     }
   }
+
+  useEffect(() => {
+    return () => {
+      setConverted(true)
+    }
+  }, [rightCurrency])
 
   return (
     <div className="wrapper">
