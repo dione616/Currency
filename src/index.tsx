@@ -2,6 +2,7 @@ import React from "react"
 import { render } from "react-dom"
 /* import Layout from "./components/Layout"; */
 import Featured from "./components/Featured/Featured"
+import Converter from "./components/Converter/Converter"
 import { Provider } from "react-redux"
 import "./styles.css"
 import store from "./redux/store"
@@ -13,15 +14,15 @@ const App: React.FC<Props> = (props) => {
     <div className="App">
       <h1>Currency Exchange</h1>
       <h2>Currency Rate</h2>
-      {/* <Calculator /> */}
+
       <Featured />
+      <h2>Currency Rate</h2>
+      <Converter />
     </div>
   )
 }
 
 export default App
-
-console.log(store.getState())
 
 const rootElement = document.getElementById("root")
 render(

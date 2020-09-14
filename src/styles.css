@@ -13,11 +13,11 @@ body {
 .App {
   font-family: sans-serif;
   text-align: center;
-}
-.wrapper {
   text-align: center;
   width: 80vw;
   margin: 0 auto;
+}
+.wrapper {
 }
 header {
   position: fixed;
@@ -42,4 +42,31 @@ footer {
   padding: 0px;
   bottom: 10px;
   width: 5px;
+}
+.converter {
+  width: 650px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.box {
+  width: 650px;
+  background: #5287f3;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+.bottom {
+  display: flex;
+}
+.bottom input {
+  width: 130px;
+  height: 40px;
+}
+.formControl {
+  display: flex;
+}
+.error {
+  background: red;
 }
