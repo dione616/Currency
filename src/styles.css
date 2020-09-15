@@ -7,20 +7,51 @@
   --color-yellow: #f0f32b;
   --color-red: #f32b2b;
 }
+
 body {
   background: #f3f5f8;
+  background-size: 120% 220%;
+  background-image: linear-gradient(90deg, rgba(245, 246, 252, 0.52), rgba(19, 117, 84, 0.473)),
+    url("https://images.unsplash.com/photo-1580519542036-c47de6196ba5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80");
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Merriweather", serif;
 }
 .App {
   font-family: sans-serif;
   text-align: center;
   text-align: center;
-  width: 80vw;
+  width: 60vw;
   margin: 0 auto;
 }
-.wrapper {
+span {
+  font-family: "Merriweather", serif;
 }
 header {
   position: fixed;
+  display: flex;
+  justify-content: space-around;
+  width: 60vw;
+}
+header .logo {
+  width: 50px;
+  height: 50px;
+}
+header h1 {
+  width: 100%;
+  margin: 0 auto;
+  margin-right: 50px;
+  font-style: italic;
+}
+main {
+  padding-top: 50px;
+  width: 60vw;
+  margin: 0 auto;
 }
 footer {
   bottom: 10px;
@@ -30,6 +61,9 @@ footer {
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+}
+.cell {
+  width: 80px;
 }
 
 .item-input {
@@ -43,30 +77,84 @@ footer {
   bottom: 10px;
   width: 5px;
 }
-.converter {
-  width: 650px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.wrapper {
+  width: 60vw;
 }
 .box {
-  width: 650px;
-  background: #5287f3;
+  /* background: #b0c5ee; */
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   padding: 20px 40px;
+  max-width: 700px;
+}
+.card {
+  overflow: hidden;
+  width: 210px;
+  border-radius: 5px;
+}
+.left {
+  background: #e1efed78;
+  box-shadow: 12px 12px 5px 0px rgb(46, 46, 46);
+}
+.right {
+  background: #81f1e178;
+  box-shadow: 12px 12px 5px 0px rgb(41, 46, 46);
 }
 .bottom {
   display: flex;
+  justify-content: center;
 }
 .bottom input {
   width: 130px;
   height: 40px;
+  background: #ffffff4f;
+  border-style: none;
+  border-radius: 5px;
 }
+.white {
+  background: #e1efed78;
+}
+.usd {
+  background-size: cover;
+  font-family: "Merriweather", serif;
+  font-weight: 600;
+  font-size: 1.1em;
+  background-image: linear-gradient(90deg, rgba(245, 246, 252, 0.52), rgba(150, 252, 208, 0.473)),
+    url("https://s0.rbk.ru/v6_top_pics/media/img/4/41/755839602871414.jpeg");
+}
+.eur {
+  background-size: cover;
+  font-family: "Merriweather", serif;
+  font-weight: 600;
+  font-size: 1.1em;
+  background-image: linear-gradient(90deg, rgba(245, 246, 252, 0.52), rgba(249, 252, 63, 0.473)),
+    url("https://a.c-dn.net/c/content/igcom/en_CH/ig-financial-markets/market-news-and-analysis/trading-strategies/2020/01/21/what-were-the-pre-euro-currencies-in-europe-/jcr:content/ArticleImage.img.jpg/1579624006132.jpg");
+}
+.rur {
+  background-size: cover;
+  font-family: "Merriweather", serif;
+  font-weight: 600;
+  font-size: 1.1em;
+  background-image: linear-gradient(90deg, rgba(245, 246, 252, 0.52), rgba(248, 201, 112, 0.473)),
+    url("https://plusworld.ru/wp-content/uploads/2018/10/rubli.jpg");
+}
+.btc {
+  background-size: cover;
+  font-family: "Merriweather", serif;
+  font-weight: 600;
+  font-size: 1.1em;
+  background-image: linear-gradient(150deg, rgba(245, 246, 252, 0.52), rgba(229, 255, 0, 0.624)),
+    url("https://topspb.tv/768x432/uploaded/news_covers/bitkoinrwtpyybfruu3xr.jpg");
+}
+
 .formControl {
   display: flex;
 }
 .error {
   background: red;
+}
+.reverse {
+  background-image: url("https://www.iconfinder.com/data/icons/arrows-i/24/Material_icons-02-41-512.png");
+  height: 20px;
 }

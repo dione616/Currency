@@ -21,10 +21,14 @@ type prev = { ccy: string; base_ccy: string; buy: string; sale: string }
 let prevPrice: prev
 
 const Item: React.FC<Props> = ({ item, changeCurrencyData }) => {
-  /* console.log(item) */
   const dispatch = useDispatch()
   const classes = useStyles()
-  const [price, setPrice] = useState({ ccy: item.ccy, base_ccy: item.base_ccy, buy: item.buy, sale: item.sale })
+  const [price, setPrice] = useState({
+    ccy: item.ccy,
+    base_ccy: item.base_ccy,
+    buy: item.buy,
+    sale: item.sale,
+  })
   const [isShown, setIsShown] = useState(false)
   const [editable, setEditable] = useState(false)
   const [valid, setValid] = useState(true)
@@ -36,28 +40,37 @@ const Item: React.FC<Props> = ({ item, changeCurrencyData }) => {
     let inputPrice = event.currentTarget.value
 
     if (option == "buy") {
-      newPrice = { ccy: item.ccy, base_ccy: item.base_ccy, buy: inputPrice, sale: item.sale }
+      newPrice = {
+        ccy: item.ccy,
+        base_ccy: item.base_ccy,
+        buy: inputPrice,
+        sale: item.sale,
+      }
     } else {
-      newPrice = { ccy: item.ccy, base_ccy: item.base_ccy, buy: item.buy, sale: inputPrice }
+      newPrice = {
+        ccy: item.ccy,
+        base_ccy: item.base_ccy,
+        buy: item.buy,
+        sale: inputPrice,
+      }
     }
+
+    console.log("newPrice:", newPrice, "prevPrice:", prevPrice)
 
     setPrice(validatePrice(prevPrice, newPrice))
   }
 
   const validatePrice = (prevPrice: prev, newPrice: newPr) => {
-    console.log(parseInt(prevPrice.buy), "prevPrice", prevPrice, "newPrice", newPrice)
     if (
-      parseInt(prevPrice.buy) > parseInt(newPrice.buy) * 1.1 ||
-      parseInt(prevPrice.buy) < parseInt(newPrice.buy) * 0.9
+      parseFloat(prevPrice.buy) > parseFloat(newPrice.buy) * 1.1 ||
+      parseFloat(prevPrice.buy) < parseFloat(newPrice.buy) * 0.9
     ) {
-      console.log("Price to buy is out of Bounds +-10%")
       setValid(false)
       return newPrice
     } else if (
-      parseInt(prevPrice.sale) > parseInt(newPrice.sale) * 1.1 ||
-      parseInt(prevPrice.sale) < parseInt(newPrice.sale) * 0.9
+      parseFloat(prevPrice.sale) > parseFloat(newPrice.sale) * 1.1 ||
+      parseFloat(prevPrice.sale) < parseFloat(newPrice.sale) * 0.9
     ) {
-      console.log("Price to sell is out of Bounds +-10%")
       setValid(false)
       return newPrice
     }
@@ -68,7 +81,7 @@ const Item: React.FC<Props> = ({ item, changeCurrencyData }) => {
   return (
     <TableRow key={item.ccy}>
       <TableCell component="th" scope="row">
-        {`${item.ccy}/${item.base_ccy}`}
+        <span>{`${item.ccy}/${item.base_ccy}`}</span>
       </TableCell>
 
       {isShown ? (
@@ -92,6 +105,7 @@ const Item: React.FC<Props> = ({ item, changeCurrencyData }) => {
               className="btn btn-cancel"
               onClick={() => {
                 setEditable(false)
+                setPrice(prevPrice)
               }}
             >
               <FontAwesomeIcon icon={faTimesCircle} />
@@ -126,7 +140,6 @@ const Item: React.FC<Props> = ({ item, changeCurrencyData }) => {
         editable ? (
           <TableCell component="th" scope="row">
             <input className="item-input" type="text" value={price.sale} onChange={(e) => changePrice(e, "sale")} />
-
             <button
               className="btn btn-send"
               onClick={() => {
@@ -138,11 +151,11 @@ const Item: React.FC<Props> = ({ item, changeCurrencyData }) => {
             >
               <FontAwesomeIcon icon={faCheck} />
             </button>
-
             <button
               className="btn btn-cancel"
               onClick={() => {
                 setEditable(false)
+                setPrice(prevPrice)
               }}
             >
               <FontAwesomeIcon icon={faTimesCircle} />
@@ -169,7 +182,9 @@ const Item: React.FC<Props> = ({ item, changeCurrencyData }) => {
         )
       ) : (
         <TableCell component="th" scope="row">
-          <div onMouseEnter={() => setIsShown(true)}>{price.sale}</div>
+          <div className="cell" onMouseEnter={() => setIsShown(true)}>
+            {price.sale}
+          </div>
         </TableCell>
       )}
     </TableRow>

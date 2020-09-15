@@ -1,7 +1,6 @@
-import React, { useState } from "react"
-import CurrencyComponent from "./Item"
-import { Currency } from "../../redux/currency"
 import { makeStyles } from "@material-ui/core/styles"
+import React, { useState } from "react"
+import { Currency } from "../../redux/currency"
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"
 import TableCell from "@material-ui/core/TableCell"
@@ -9,9 +8,7 @@ import TableContainer from "@material-ui/core/TableContainer"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import Paper from "@material-ui/core/Paper"
-import { TextField } from "@material-ui/core"
 import Item from "./Item"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const useStyles = makeStyles({
   label: {
@@ -22,7 +19,7 @@ const useStyles = makeStyles({
     margin: "0 auto",
   },
   row: {
-    background: "#f7931b",
+    background: "#f7941b8a",
   },
 })
 
@@ -37,9 +34,15 @@ const CurrencyList = (props: any) => {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow className={classes.row}>
-              <TableCell>Currency/Date</TableCell>
-              <TableCell>Buy</TableCell>
-              <TableCell /* align="right" */>Sale</TableCell>
+              <TableCell>
+                <span> Currency/Date</span>
+              </TableCell>
+              <TableCell>
+                <span>Buy</span>
+              </TableCell>
+              <TableCell>
+                <span>Sale</span>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

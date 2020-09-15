@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { connect, ConnectedProps } from "react-redux"
+import { connect, ConnectedProps, useDispatch } from "react-redux"
 import CurrencyList from "./CurrencyList"
 
 import { selectData, loadCurrencyData } from "../../redux/currency"
@@ -18,11 +18,10 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 interface Props extends PropsFromRedux {}
 
 const Featured: React.FC<Props> = (props) => {
-  console.log("FROM:", props)
+  const dispatch = useDispatch()
 
-  const [currency, setCurrency] = useState(props.data)
   useEffect(() => {
-    props.loadCurrencyData()
+    dispatch(loadCurrencyData())
     return () => {}
   }, [])
 

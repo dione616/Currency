@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { selectData } from "../../redux/currency"
 import { RootState } from "../../redux/store"
-import { Currency } from "../../redux/currency"
-import PropTypes from "prop-types"
+import Dropdown from "./Dropdown"
 
 const mapStateToProps = (state: RootState) => {
   return {
     data: selectData(state),
   }
+}
+
+interface Currency {
+  count: number
+  currency: string
 }
 
 const connector = connect(mapStateToProps)
@@ -17,15 +21,23 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 interface Props extends PropsFromRedux {}
 
 const Converter: React.FC<Props> = (props) => {
-  const { data } = props.data
-  const [leftCurrency, setLeftCurrency] = useState({ count: 101, currency: "UAH" })
-  const [rightCurrency, setRIghtCurrency] = useState({ count: 3.63, currency: "USD" })
-  const [converted, setConverted] = useState(true)
-  let convertedValue
+  console.log(props)
 
-  const mapData = data.map((item) => {
-    parseInt(item.base_ccy)
-    parseInt(item.ccy)
+  const { data } = props.data
+  const [leftCurrency, setLeftCurrency] = useState<Currency>({
+    count: 100,
+    currency: "UAH",
+  })
+  const [rightCurrency, setRIghtCurrency] = useState<Currency>({
+    count: 3.54,
+    currency: "USD",
+  })
+  const [converted, setConverted] = useState(true)
+  let convertedValue: number
+
+  const mapedData = data.map((item) => {
+    parseFloat(item.base_ccy)
+    parseFloat(item.ccy)
     return item
   })
 
@@ -38,37 +50,68 @@ const Converter: React.FC<Props> = (props) => {
   }
 
   const handleConvert = () => {
-    const searchCurrency = mapData.filter(
-      (note) => note.base_ccy === leftCurrency.currency && note.ccy === rightCurrency.currency
-    )
+    const searchCurrency = mapedData.filter((note) => {
+      return note.base_ccy === leftCurrency.currency && note.ccy === rightCurrency.currency
+    })
 
-    let found = searchCurrency[0]
-    if (found) {
-      console.log(found)
-      console.log("Bef:", leftCurrency.count, parseFloat(found.sale))
+    if (searchCurrency.length > 0) {
+      //calculate
+      convertedValue = leftCurrency.count / parseFloat(searchCurrency[0].sale)
 
-      convertedValue = leftCurrency.count / parseFloat(found.sale)
-
-      setRIghtCurrency({ count: convertedValue, currency: rightCurrency.currency })
+      return {
+        count: convertedValue,
+        currency: rightCurrency.currency,
+      }
     } else {
       setConverted(false)
+      return {
+        count: rightCurrency.count,
+        currency: rightCurrency.currency,
+      }
+    }
+  }
+
+  const handleReverse = () => {
+    console.log("reverse")
+  }
+
+  const color = () => {
+    switch (rightCurrency.currency) {
+      case "USD": {
+        return "usd"
+      }
+      case "EUR": {
+        return "eur"
+      }
+      case "RUR": {
+        return "rur"
+      }
+      case "BTC": {
+        return "btc"
+      }
+      default:
+        return "white"
     }
   }
 
   useEffect(() => {
+    if (handleConvert().count !== rightCurrency.count || handleConvert().currency !== rightCurrency.currency) {
+      setRIghtCurrency(handleConvert())
+    }
+
     return () => {
       setConverted(true)
     }
-  }, [rightCurrency])
+  }, [rightCurrency, leftCurrency])
 
   return (
     <div className="wrapper">
       <div className="box">
-        <div className="left">
+        <div className="card left">
           <h3>Change</h3>
           <div className="bottom">
             <Dropdown
-              data={mapData}
+              data={mapedData}
               value={leftCurrency}
               placeholder="Select curr"
               onChange={handleDropdown}
@@ -77,77 +120,18 @@ const Converter: React.FC<Props> = (props) => {
           </div>
         </div>
         <div className="middle">
-          <button onClick={handleConvert}>Convert</button>
+          <button className="revers" onClick={handleReverse}>
+            Revers
+          </button>
           {!converted ? <div className="error">Wrong pair to convert</div> : null}
         </div>
-        <div className="right">
+        <div className={`card right ${color()}`}>
           <h3>Get</h3>
           <div className="bottom">
-            <Dropdown
-              data={mapData}
-              value={rightCurrency}
-              placeholder="Select"
-              onChange={handleDropdown}
-              side={"right"}
-            />
+            <Dropdown data={mapedData} value={rightCurrency} onChange={handleDropdown} side={"right"} />
           </div>
         </div>
       </div>
-    </div>
-  )
-}
-
-const Dropdown = (props: any) => {
-  const { value, data, styleClass, placeholder, onChange, side } = props
-
-  const [currency, setCurrency] = useState(value.currency)
-  const [count, setCount] = useState(value.count)
-
-  const handleCurrChange = (event: any, side: string) => {
-    const currency = event.target.value
-
-    setCurrency(currency)
-
-    onChange(count, currency, side) //callback
-  }
-  const handlePriceChange = (event: any, side: string) => {
-    const count = event.target.value
-    setCount(count)
-
-    onChange(count, currency, side) //callback
-  }
-
-  return (
-    <div className={`form-group ${styleClass}`}>
-      {side === "left" ? (
-        <div>
-          <input type="number" value={value.count} onChange={(e) => handlePriceChange(e, "left")} />
-          <select value={value.currency} className="form-control" onChange={(e) => handleCurrChange(e, "left")}>
-            <option value="">{placeholder}</option>
-            {data.map((item: any, key: any) => {
-              return (
-                <option key={key} value={item.base_ccy}>
-                  {item.base_ccy}
-                </option>
-              )
-            })}
-          </select>
-        </div>
-      ) : (
-        <div>
-          <input type="number" value={value.count} onChange={(e) => handlePriceChange(e, "right")} />
-          <select value={value.currency} className="form-control" onChange={(e) => handleCurrChange(e, "rigth")}>
-            <option value="">{placeholder}</option>
-            {data.map((item: any, key: any) => {
-              return (
-                <option key={key} value={item.ccy}>
-                  {item.ccy}
-                </option>
-              )
-            })}
-          </select>
-        </div>
-      )}
     </div>
   )
 }

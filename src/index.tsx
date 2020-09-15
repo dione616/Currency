@@ -6,18 +6,27 @@ import Converter from "./components/Converter/Converter"
 import { Provider } from "react-redux"
 import "./styles.css"
 import store from "./redux/store"
+import logo from "./logo.png"
 
 interface Props {}
 
 const App: React.FC<Props> = (props) => {
   return (
     <div className="App">
-      <h1>Currency Exchange</h1>
-      <h2>Currency Rate</h2>
+      <header>
+        <div className="logo">
+          <img width="50px" src={logo} alt="logo" />
+        </div>
+        <h1>Currency App</h1>
+      </header>
 
-      <Featured />
-      <h2>Currency Rate</h2>
-      <Converter />
+      <main>
+        <h2>Currency Rate</h2>
+
+        <Featured />
+        <h2>Exchenge</h2>
+        <Converter />
+      </main>
     </div>
   )
 }
