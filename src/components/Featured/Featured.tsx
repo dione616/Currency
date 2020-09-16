@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux"
 import CurrencyList from "./CurrencyList"
 
-import { selectData, loadCurrencyData } from "../../redux/currency"
+import { selectCurrencyData, loadCurrencyData } from "../../redux/currency"
 import { RootState } from "../../redux/store"
 
 const mapStateToProps = (state: RootState) => {
   return {
-    data: selectData(state),
+    data: selectCurrencyData(state),
   }
 }
 const mapDispatch = { loadCurrencyData }

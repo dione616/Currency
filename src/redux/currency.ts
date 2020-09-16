@@ -30,7 +30,16 @@ interface LoadFailureAction extends Action<typeof LOAD_FAILURE> {
 interface ChangeRequestData extends Action<typeof CHANGE_DATA> {
   payload: { curr: Currency }
 }
+//in case to send edited data to server
+interface ChangeSuccessData extends Action<typeof CHANGE_DATA> {
+  payload: { curr: Currency }
+}
+//in case of error sending to server
+interface ChangeFailureData extends Action<typeof CHANGE_DATA> {
+  payload: { error: string }
+}
 
+//Thunk because use API
 export const loadCurrencyData = (): ThunkAction<
   void /*Promise<void> or just void */,
   RootState,
@@ -50,30 +59,28 @@ export const loadCurrencyData = (): ThunkAction<
   }
 }
 
+//regular AC
 export const changeCurrencyData = (curr: Currency) => {
   console.log("AC")
 
   return { type: CHANGE_DATA, payload: { curr } }
 }
 
-export const selectData = (rootState: RootState) => rootState.currency
+//selector to provide currrencyData
+export const selectCurrencyData = (rootState: RootState) => rootState.currency
 
 const initialState: CurrencyState = {
-  data: [{ ccy: "USD", base_ccy: "UAH", buy: "27.75000", sale: "28.10000" }],
+  data: [{ ccy: "USD", base_ccy: "UAH", buy: "28.01000", sale: "28.33000" }],
 }
 
 const currencyReducer = (state = initialState, action: LoadSucceessAction | ChangeRequestData) => {
   switch (action.type) {
     case LOAD_SUCCEESS: {
-      return action.payload
+      let { data } = action.payload
+      return { data }
     }
     case CHANGE_DATA: {
-      /* const { curr } = action.payload
-      let filteredArray = state.data.filter((currency) => currency.ccy !== curr.ccy)
-      const newState = { ...state, data: filteredArray, curr }
-      return newState */
       const { curr } = action.payload
-      console.log("CHANGE IN REDUCER", curr)
       return { ...state, data: [...state.data.filter((c) => c.ccy !== curr.ccy), curr] }
     }
     default: {

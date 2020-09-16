@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Currency } from "../../redux/currency"
 
 const Dropdown = (props: any) => {
   const { value, data, onChange, side, reversed } = props
@@ -18,6 +19,14 @@ const Dropdown = (props: any) => {
     }
   }
 
+  let ar: string[] = []
+  data.map((item: Currency) => {
+    ar.push(item.base_ccy)
+    ar.push(item.ccy)
+  })
+  let removeDuplicates = (names: any) => ar.filter((v, i) => ar.indexOf(v) === i)
+  let allCurr = removeDuplicates(ar)
+
   return (
     <div className={`form-group`}>
       {side === "left" ? (
@@ -26,8 +35,8 @@ const Dropdown = (props: any) => {
           <select value={value.currency} className="form-control" onChange={(e) => handleChange(e, "left")}>
             {data.map((item: any, key: any) => {
               return (
-                <option key={key} value={!reversed ? item.base_ccy : item.ccy}>
-                  {!reversed ? item.base_ccy : item.ccy}
+                <option key={key} value={!reversed ? allCurr[key] : allCurr[key]}>
+                  {!reversed ? allCurr[key] : allCurr[key]}
                 </option>
               )
             })}
@@ -39,8 +48,8 @@ const Dropdown = (props: any) => {
           <select value={value.currency} className="form-control" onChange={(e) => handleChange(e, "rigth")}>
             {data.map((item: any, key: any) => {
               return (
-                <option key={key} value={!reversed ? item.ccy : item.base_ccy}>
-                  {!reversed ? item.ccy : item.base_ccy}
+                <option key={key} value={!reversed ? allCurr[key] : allCurr[key]}>
+                  {!reversed ? allCurr[key] : allCurr[key]}
                 </option>
               )
             })}
