@@ -12,11 +12,7 @@ body {
   background: #f3f5f8;
   height: 100%;
   background-size: cover;
-  background-image: linear-gradient(
-      90deg,
-      rgba(245, 246, 252, 0.52),
-      rgba(19, 117, 84, 0.473)
-    ),
+  background-image: linear-gradient(90deg, rgba(245, 246, 252, 0.52), rgba(19, 117, 84, 0.473)),
     url("https://images.unsplash.com/photo-1580519542036-c47de6196ba5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80");
 }
 h1,
@@ -134,11 +130,7 @@ footer div {
   font-family: "Merriweather", serif;
   font-weight: 600;
   font-size: 1.1em;
-  background-image: linear-gradient(
-      90deg,
-      rgba(245, 246, 252, 0.52),
-      rgba(150, 252, 208, 0.473)
-    ),
+  background-image: linear-gradient(90deg, rgba(245, 246, 252, 0.52), rgba(150, 252, 208, 0.473)),
     url("https://s0.rbk.ru/v6_top_pics/media/img/4/41/755839602871414.jpeg");
 }
 .eur {
@@ -146,11 +138,7 @@ footer div {
   font-family: "Merriweather", serif;
   font-weight: 600;
   font-size: 1.1em;
-  background-image: linear-gradient(
-      90deg,
-      rgba(245, 246, 252, 0.52),
-      rgba(249, 252, 63, 0.473)
-    ),
+  background-image: linear-gradient(90deg, rgba(245, 246, 252, 0.52), rgba(249, 252, 63, 0.473)),
     url("https://a.c-dn.net/c/content/igcom/en_CH/ig-financial-markets/market-news-and-analysis/trading-strategies/2020/01/21/what-were-the-pre-euro-currencies-in-europe-/jcr:content/ArticleImage.img.jpg/1579624006132.jpg");
 }
 .rur {
@@ -158,11 +146,7 @@ footer div {
   font-family: "Merriweather", serif;
   font-weight: 600;
   font-size: 1.1em;
-  background-image: linear-gradient(
-      90deg,
-      rgba(245, 246, 252, 0.52),
-      rgba(248, 201, 112, 0.473)
-    ),
+  background-image: linear-gradient(90deg, rgba(245, 246, 252, 0.52), rgba(248, 201, 112, 0.473)),
     url("https://plusworld.ru/wp-content/uploads/2018/10/rubli.jpg");
 }
 .btc {
@@ -170,11 +154,7 @@ footer div {
   font-family: "Merriweather", serif;
   font-weight: 600;
   font-size: 1.1em;
-  background-image: linear-gradient(
-      150deg,
-      rgba(245, 246, 252, 0.52),
-      rgba(229, 255, 0, 0.624)
-    ),
+  background-image: linear-gradient(150deg, rgba(245, 246, 252, 0.52), rgba(229, 255, 0, 0.624)),
     url("https://topspb.tv/768x432/uploaded/news_covers/bitkoinrwtpyybfruu3xr.jpg");
 }
 
@@ -183,6 +163,11 @@ footer div {
 }
 .error {
   background: red;
+  border-radius: 5px;
+  border: 2px solid black;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .reverse {
   background-image: url("https://www.iconfinder.com/data/icons/arrows-i/24/Material_icons-02-41-512.png");
@@ -192,6 +177,12 @@ footer div {
   margin-top: 30px;
   font-weight: 600;
   font-family: "Merriweather", serif;
+  background: #fbc58388;
+  border-radius: 5px;
+  border: 2px solid black;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
 }
 @media only screen and (max-width: 650px) {
   .App {
@@ -208,7 +199,7 @@ footer div {
     font-size: 1.2em;
   }
   .MuiTableCell-body {
-    padding: 5px;
+    padding: 1px;
   }
   .box {
     padding: 0 0;
@@ -230,5 +221,6 @@ footer div {
   .rightResult {
     letter-spacing: -1px;
     margin-left: 20px;
+    font-size: 0.9em;
   }
 }
